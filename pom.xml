@@ -14,7 +14,7 @@
         <assertj.version>1.7.0</assertj.version>
         <slf4j.version>1.7.5</slf4j.version>
         <logback.version>1.0.12</logback.version>
-
+         <msgpack.version>0.6.9</msgpack.version>
     </properties>
 
 
@@ -76,6 +76,17 @@
         </dependency>
 
 
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-pool2</artifactId>
+            <version>2.3</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.msgpack</groupId>
+            <artifactId>msgpack</artifactId>
+            <version>${msgpack.version}</version>
+        </dependency>
 
 
 
