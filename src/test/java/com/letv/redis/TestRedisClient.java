@@ -9,13 +9,15 @@ import java.util.List;
  */
 public class TestRedisClient {
 
-    private static final RedisClient REDIS_CLIENT = new RedisClient("10.140.120.123:7006,10.140.120.123:7005," +
+    private static final RedisClient REDIS_CLIENT = new RedisClient(
+            "10.140.120.123:7006,10.140.120.123:7005," +
             "10.140.120.122:7004,10.140.120.122:7003" +
             "10.140.120.121:7001,10.140.120.121:7000", "auth-");
 
     public static void main(String[] args) {
         System.out.println(REDIS_CLIENT.set("abc", "test", "NX", "EX", 150)); //有用
         System.out.println("----------done---------");
+
 //        final String key, final Object value, final String nxxx, final String expx, final long time
     }
 
