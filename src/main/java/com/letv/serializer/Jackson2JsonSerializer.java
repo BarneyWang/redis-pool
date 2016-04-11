@@ -2,7 +2,6 @@ package com.letv.serializer;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sun.xml.internal.ws.encoding.soap.SerializationException;
 
 /**
  * Created by wangdi on 16-3-30.
