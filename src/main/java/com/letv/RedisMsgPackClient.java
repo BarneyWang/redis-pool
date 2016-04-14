@@ -1,9 +1,11 @@
 package com.letv;
 
+import com.letv.msgpack.ObjectTemplate;
 import com.letv.serializer.MsgpackSerializer;
 import com.letv.serializer.SerializationUtils;
 import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
 import org.msgpack.template.Template;
+import org.msgpack.template.Templates;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.CollectionUtils;
@@ -93,6 +95,14 @@ public class RedisMsgPackClient {
         return this.jc.set(getKey(key), serializer.serialize(value), nxxx.getBytes(), expx.getBytes(), time);
     }
 
+
+
+
+
+
+
+
+
     public <T> T get(final String key, Class<T> javaType) {
         return serializer.deserialize(this.jc.get(getKey(key)), javaType);
     }
@@ -141,11 +151,18 @@ public class RedisMsgPackClient {
         return CollectionUtils.isEmpty(list) ? null : serializer.deserialize(list.get(1), javaType);
     }
 
+//    public <T> List<T> lrange(final String key, int start, int end) {
+//        List<byte[]> list = this.jc.lrange(getKey(key), start, end);
+//
+//        return (List)deserializeValues(list, List.class);
+//    }
+
     public <T> List<T> lrange(final String key, int start, int end) {
         List<byte[]> list = this.jc.lrange(getKey(key), start, end);
 
-        return (List)deserializeValues(list, List.class);
+        return (List)deserializeValues(list, Templates.tList(ObjectTemplate.getInstance()));
     }
+
 
     private <T extends Collection<?>> T deserializeValues(Collection<byte[]> rawValues, Class<T> type) {
         if(rawValues == null) {
@@ -162,6 +179,23 @@ public class RedisMsgPackClient {
             return (T) values;
         }
     }
+
+
+    private <T extends Collection<?>> T deserializeValues(Collection<byte[]> rawValues,Template<T> template) {
+        if(rawValues == null) {
+            return null;
+        } else {
+            Object values = List.class.isAssignableFrom(template.getClass())?new ArrayList(rawValues.size()):new LinkedHashSet(rawValues.size());
+            Iterator i$ = rawValues.iterator();
+            while(i$.hasNext()) {
+                byte[] bs = (byte[])i$.next();
+                ((Collection)values).add(serializer.deserialize(bs,template));
+            }
+
+            return (T) values;
+        }
+    }
+
 
     private byte[] getKey(String key) {
         byte[] rawKey = SerializationUtils.encode(key);

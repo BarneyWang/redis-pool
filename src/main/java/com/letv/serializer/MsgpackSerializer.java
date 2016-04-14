@@ -28,6 +28,7 @@ public class MsgpackSerializer implements Serializer<Object> {
         }
     }
 
+
     @Override
     public <T> T deserialize(byte[] bytes, Class<T> clz) throws SerializationException {
 
