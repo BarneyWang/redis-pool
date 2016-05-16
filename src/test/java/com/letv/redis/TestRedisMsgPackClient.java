@@ -15,7 +15,7 @@ public class TestRedisMsgPackClient {
     private static final RedisMsgPackClient CLIENT = new RedisMsgPackClient(
             "10.140.120.123:7006,10.140.120.123:7005," +
                     "10.140.120.122:7004,10.140.120.122:7003," +
-                    "10.140.120.121:7001,10.140.120.121:7000", "auth-");
+                    "10.140.120.121:7001,10.140.120.121:7000", "test-");
     public static void main(String[] args) {
         System.out.println(CLIENT.set("abc", "test", "NX", "EX", 150)); //有用
         System.out.println("----------done---------");

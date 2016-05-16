@@ -19,7 +19,6 @@ public  class MessagePackPool {
         conf.setMaxIdle(10);
         conf.setMaxTotal(100);
         conf.setMinIdle(20);
-        conf.getMinIdle();
         pool = new GenericObjectPool<MessagePack>(factory,conf);
     }
 
