@@ -18,13 +18,27 @@ public class TestMsgPack {
 
 
     public static void main(String[] args) throws IOException {
+        MessagePack msgpack = new MessagePack();
+
+
+
+        String abc = new String("abc");
+        byte[] bs = msgpack.write(abc);
+        String abc1=msgpack.read(bs,Templates.TString);
+        System.out.println(abc1);
+
+
+
+
         // Create serialize objects.
         List<String> src = new ArrayList<String>();
         src.add("msgpack");
         src.add("kumofs");
         src.add("viver");
 
-        MessagePack msgpack = new MessagePack();
+
+
+        System.out.println(msgpack.read(bs,Templates.TString));
 // Serialize
         byte[] raw = msgpack.write(src);
 

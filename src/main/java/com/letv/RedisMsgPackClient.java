@@ -18,6 +18,7 @@ import java.util.*;
 /**
  * Created by wangdi5 on 2016/4/5.
  */
+@Deprecated
 public class RedisMsgPackClient {
 
 
@@ -98,11 +99,6 @@ public class RedisMsgPackClient {
 
 
 
-
-
-
-
-
     public <T> T get(final String key, Class<T> javaType) {
         return serializer.deserialize(this.jc.get(getKey(key)), javaType);
     }
@@ -160,7 +156,8 @@ public class RedisMsgPackClient {
     public <T> List<T> lrange(final String key, int start, int end) {
         List<byte[]> list = this.jc.lrange(getKey(key), start, end);
 
-        return (List)deserializeValues(list, Templates.tList(ObjectTemplate.getInstance()));
+//        return (List)deserializeValues(list, Templates.tList(ObjectTemplate.getInstance()));
+        return (List)deserializeValues(list, Templates.tCollection(ObjectTemplate.getInstance()));
     }
 
 

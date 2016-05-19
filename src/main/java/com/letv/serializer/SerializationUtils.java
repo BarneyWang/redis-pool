@@ -20,11 +20,11 @@ public class SerializationUtils {
         if(str == null) {
             return SerializationUtils.EMPTY_ARRAY;
         }
-
         try {
             return str.getBytes(DEFAULT_CHARSET);
         } catch (Exception e) {
             throw new SerializationException("Could not write String: " + e.getMessage(), e);
         }
     }
+
 }

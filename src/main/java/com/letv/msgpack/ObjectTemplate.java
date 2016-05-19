@@ -20,6 +20,10 @@ import java.util.Map;
  */
 public class ObjectTemplate extends AbstractTemplate<Object> {
 
+    static final ObjectTemplate instance = new ObjectTemplate();
+
+    public static final ObjectTemplate OBJECT_TEMPLATE = ObjectTemplate.getInstance();
+
     private ObjectTemplate() {
     }
 
@@ -27,7 +31,7 @@ public class ObjectTemplate extends AbstractTemplate<Object> {
         return instance;
     }
 
-    static final ObjectTemplate instance = new ObjectTemplate();
+
 
     @Override
     public void write(Packer pk, Object v, boolean required) throws IOException {
